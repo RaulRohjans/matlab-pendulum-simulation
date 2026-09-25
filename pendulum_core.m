@@ -58,10 +58,13 @@ freeDynamics = @(t, x) pendulumDynamics(t, x, 0, p, g);
 
 figure('Name', 'Open-loop nonlinear pendulum');
 subplot(2,1,1);
-plot(tEquilibrium, rad2deg(xEquilibrium(:,1)), 'LineWidth', 1.4);
+plot(tEquilibrium, rad2deg(xEquilibrium(:,1)), ...
+    'Color', [0.25, 0.25, 0.25], 'LineWidth', 1.4);
 hold on;
-plot(tPositive, rad2deg(xPositive(:,1)), 'LineWidth', 1.4);
-plot(tNegative, rad2deg(xNegative(:,1)), 'LineWidth', 1.4);
+plot(tPositive, rad2deg(xPositive(:,1)), ...
+    'Color', [0, 0.4470, 0.7410], 'LineWidth', 1.4);
+plot(tNegative, rad2deg(xNegative(:,1)), ...
+    'Color', [0.8500, 0.3250, 0.0980], 'LineWidth', 1.4);
 yline(180, 'k:', 'HandleVisibility', 'off');
 yline(-180, 'k:', 'HandleVisibility', 'off');
 grid on;
@@ -75,9 +78,11 @@ legend('Exact equilibrium', '+1 deg perturbation', ...
 % upright equilibrium visible. With damping, both trajectories spiral
 % toward a hanging equilibrium at +180 or -180 degrees.
 subplot(2,1,2);
-plot(rad2deg(xPositive(:,1)), xPositive(:,2), 'LineWidth', 1.4);
+plot(rad2deg(xPositive(:,1)), xPositive(:,2), ...
+    'Color', [0, 0.4470, 0.7410], 'LineWidth', 1.4);
 hold on;
-plot(rad2deg(xNegative(:,1)), xNegative(:,2), 'LineWidth', 1.4);
+plot(rad2deg(xNegative(:,1)), xNegative(:,2), ...
+    'Color', [0.8500, 0.3250, 0.0980], 'LineWidth', 1.4);
 grid on;
 xlabel('Angle from upright [deg]');
 ylabel('Angular velocity [rad/s]');
