@@ -471,7 +471,10 @@ exportgraphics(fig, fullfile(resultsDir, ...
 % machines without Simulink or Simscape Multibody.
 finalModelFile = fullfile(projectRoot, 'actuated_pendulum_final.slx');
 if runSimulinkModel && isfile(finalModelFile)
-    if exist('sim', 'file') ~= 2
+    % Newer MATLAB releases can report Simulink's `sim` entry point as a
+    % package/folder (exist == 7), so only treat it as unavailable when it
+    % cannot be resolved at all.
+    if isempty(which('sim'))
         warning('Simulink is unavailable; the final SLX check was skipped.');
     else
         try

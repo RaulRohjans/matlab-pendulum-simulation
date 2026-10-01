@@ -42,7 +42,8 @@ rows in one table.
 
 ### Optional Simulink/Simscape model
 
-After installing Simulink, Simscape, and Simscape Multibody, run:
+After installing Simulink, Simscape, and Simscape Multibody, either open
+`actuated_pendulum_final.slx` and click **Run**, or run the complete workflow:
 
 ```matlab
 build_pendulum_model
@@ -50,16 +51,21 @@ pendulum_core
 ```
 
 The builder creates `actuated_pendulum_final.slx` without changing the supplied
-team models. When that model is available, the last section of
+team models. The generated model has an initialization callback that supplies
+safe defaults for a direct click on **Run**: observer enabled, zero actuator
+disturbance, and zero measurement noise. Existing workspace values are kept,
+so those settings can still be overridden before running. When the model is
+available, the last section of
 `pendulum_core.m` attempts the same final angle-only disturbed case in
 Simulink. A successful validation additionally creates:
 
 - `results/05_simulink_validation.png`
 - `results/simulink_metrics.csv`
 
-The equation-based MATLAB workflow has been run. The optional final
-Simulink/Simscape validation is a separate check and is **not yet claimed as
-tested** here.
+The equation-based MATLAB workflow and a clean-workspace direct run of the
+Simulink/Simscape model have both been tested. If MATLAB was started without
+Java, the numerical simulation still runs, but Mechanics Explorer reports that
+its optional 3-D visualization is unavailable.
 
 ## Model and controller equations
 
