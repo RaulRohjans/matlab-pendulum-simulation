@@ -1,6 +1,11 @@
-function experimentTable = run_part2_experiments(makePlots)
+function [experimentTable,workflowResult] = run_part2_experiments(makePlots)
 %RUN_PART2_EXPERIMENTS Required iLQR sensitivity and feasibility studies.
 % Covers force/cart limits, cost weights, horizon, and two initial guesses.
+% Clicking Run (or calling this function without inputs) first runs the
+% complete Part 2 workflow, so all four result figures remain visible:
+% capture zone, nominal iLQR, Simscape validation, and experiments.
+% Use run_part2_experiments(false) for experiments without figures or
+% Simulink.
 
 if nargin < 1
     makePlots = true;
@@ -9,10 +14,28 @@ projectRoot = fileparts(mfilename('fullpath'));
 resultsDir = fullfile(projectRoot,'results');
 if ~isfolder(resultsDir),mkdir(resultsDir);end
 
+workflowResult = struct();
+if makePlots
+    % Keep figures visible in ordinary MATLAB windows when this file is run
+    % from the Editor. setup_cartpole also exports the same figures to the
+    % results directory.
+    set(groot,'defaultFigureVisible','on');
+    if usejava('desktop')
+        set(groot,'defaultFigureWindowStyle','normal');
+    end
+    workflowResult = setup_cartpole(struct( ...
+        'runSimulink',true, ...
+        'makePlots',true, ...
+        'runCaptureStudy',true, ...
+        'showMultibodyExplorer',usejava('desktop')));
+    capture = workflowResult.captureStudy;
+else
+    capture = capture_zone_experiment(false);
+end
+
 model = struct('M',1.0,'m',1.0,'ell',0.25,'bc',0.1,'bp',0.05,'g',9.81);
 Ts = 0.01;
 x0 = [0;0;pi;0];
-capture = capture_zone_experiment(false);
 P_lqr = capture.P_lqr;
 c_cap = capture.c_cap;
 
@@ -107,6 +130,7 @@ if makePlots
     ylabel('Maximum |p| [m]'); grid on;
     exportgraphics(fig,fullfile(resultsDir,'04_ilqr_experiments.png'), ...
         'Resolution',160);
+    drawnow;
 end
 end
 

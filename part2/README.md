@@ -82,6 +82,11 @@ initial guesses:
 experiments = run_part2_experiments;
 ```
 
+Running this file from the MATLAB Editor with the **Run** button performs the
+complete workflow and leaves all four result figures open while also saving
+them in `results/`. For an experiments-only run without figures or Simulink,
+use `run_part2_experiments(false)`.
+
 The experiment script reports optimization failures instead of stopping at the
 first unsuccessful case. Note that `xmax` is a feasibility check in the
 provided plant, not a physical hard stop; the cart-position cost shapes the
