@@ -1,6 +1,8 @@
 .DS_Store
-/tmp
-/results
+**/tmp/
+**/results/
 *.slxc
-/slprj/
+**/slprj/
+*.autosave
+*.r20??b
 .r2023b

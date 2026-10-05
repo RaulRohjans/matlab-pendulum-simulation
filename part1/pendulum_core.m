@@ -3,13 +3,13 @@
 % discretization, full-state LQR, angle-only observer, and the experiments
 % requested in the Part 1 brief.  All random experiments use fixed seeds.
 %
-% Outputs are written to the root results folder:
+% Outputs are written to this Part 1 folder's results subfolder:
 %   all_metrics.csv, controller_metrics.csv, observer_metrics.csv
 %   01_open_loop.png ... 04_final_disturbed_angle_only.png
 %
 % The equation-based work runs with base MATLAB. Control System Toolbox is
 % used when available; small two-state fallbacks are included for dlqr and
-% place. If root/actuated_pendulum_final.slx exists, it is run at the end.
+% place. If actuated_pendulum_final.slx exists here, it is run at the end.
 
 clear; clc; close all;
 

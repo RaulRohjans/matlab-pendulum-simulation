@@ -8,7 +8,7 @@ observer, required experiments, metrics, assertions, and plots in one file.
 
 ## Running the project
 
-1. Open MATLAB and make this repository the current folder.
+1. Open MATLAB and make the `part1` folder the current folder.
 2. Run:
 
    ```matlab
@@ -46,12 +46,10 @@ After installing Simulink, Simscape, and Simscape Multibody, either open
 `actuated_pendulum_final.slx` and click **Run**, or run the complete workflow:
 
 ```matlab
-build_pendulum_model
 pendulum_core
 ```
 
-The builder creates `actuated_pendulum_final.slx` without changing the supplied
-team models. The generated model has an initialization callback that supplies
+The checked-in final model has an initialization callback that supplies
 safe defaults for a direct click on **Run**: observer enabled, zero actuator
 disturbance, and zero measurement noise. Existing workspace values are kept,
 so those settings can still be overridden before running. When the model is
@@ -66,6 +64,10 @@ The equation-based MATLAB workflow and a clean-workspace direct run of the
 Simulink/Simscape model have both been tested. If MATLAB was started without
 Java, the numerical simulation still runs, but Mechanics Explorer reports that
 its optional 3-D visualization is unavailable.
+
+`build_pendulum_model.m` is retained as implementation history, but it is not
+part of the normal run path because its completed teammate source model was
+removed before this reorganization. The checked-in final model is authoritative.
 
 ## Model and controller equations
 
